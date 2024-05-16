@@ -38,9 +38,7 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import jenkins.model.Jenkins;
 import org.jenkinsci.plugins.scriptler.ScriptlerManagement;
-import org.jenkinsci.plugins.scriptler.ScriptlerPermissions;
 import org.jenkinsci.plugins.scriptler.share.CatalogInfo;
 import org.jenkinsci.plugins.scriptler.util.ByIdSorter;
 
@@ -160,12 +158,7 @@ public final class ScriptlerConfiguration extends ScriptSet implements Saveable 
 
     @Restricted(DoNotUse.class) // for Jelly view
     public List<ScriptAndApproved> getSortedScripts(){
-        List<Script> sortedScripts;
-        if(Jenkins.get().hasPermission(ScriptlerPermissions.CONFIGURE)){
-            sortedScripts = new ArrayList<>(this.getScripts());
-        }else{
-            sortedScripts = new ArrayList<>(this.getUserScripts());
-        }
+        List<Script> sortedScripts = new ArrayList<>(this.getScripts());
 
         sortedScripts.sort(Script.COMPARATOR_BY_NAME);
 

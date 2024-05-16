@@ -82,14 +82,12 @@ public class ScriptlerManagement extends ManagementLink implements RootAction {
     }
     
     public boolean hasAtLeastOneScriptlerPermission(){
-        return Jenkins.get().hasPermission(ScriptlerPermissions.RUN_SCRIPTS) || Jenkins.get().hasPermission(ScriptlerPermissions.CONFIGURE);
+        return Jenkins.get().hasAnyPermission(ScriptlerPermissions.CONFIGURE , ScriptlerPermissions.RUN_SCRIPTS);
     }
     
     public void checkAtLeastOneScriptlerPermission(){
         // to be sure the user has either CONFIGURE or RUN_SCRIPTS permission
-        if(!Jenkins.get().hasPermission(ScriptlerPermissions.RUN_SCRIPTS)){
-            Jenkins.get().checkPermission(ScriptlerPermissions.CONFIGURE);
-        }
+        Jenkins.get().checkAnyPermission(ScriptlerPermissions.CONFIGURE, ScriptlerPermissions.RUN_SCRIPTS);
     }
 
     /*

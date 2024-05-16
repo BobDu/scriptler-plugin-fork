@@ -80,16 +80,6 @@ public class ScriptSet {
         return Collections.unmodifiableSet(scriptSet);
     }
 
-    public final Set<Script> getUserScripts() {
-        Set<Script> userScripts = new TreeSet<>();
-        for (Script script : scriptSet) {
-            if (script.nonAdministerUsing) {
-                userScripts.add(script);
-            }
-        }
-        return userScripts;
-    }
-
     public void setScripts(Set<Script> scripts) {
         scriptSet.clear();
         scriptSet.addAll(scripts);
