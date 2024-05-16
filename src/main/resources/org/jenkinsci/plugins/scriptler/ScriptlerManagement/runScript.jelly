@@ -97,26 +97,30 @@ THE SOFTWARE.
 					</tr>
 				</table>
 
-				<textarea id="script" name="script" class="${h.isUnitTest ? '' : 'script'}">
-					<j:choose>
-						<j:when test="${scriptNotFound}">
-							${%ScriptNotFound}
-						</j:when>
-						<j:otherwise>
-							${script.script}
-						</j:otherwise>
-					</j:choose>
-				</textarea>
+                <f:textarea name="script" value="${script.script}" readonly="true" />
+                <div style="margin-top: 2rem; margin-bottom: 2rem;" />
+
 			<j:if test="${notApprovedYet}">
+                <div style="font-weight: 500;">
 				<j:choose>
 					<j:when test="${h.hasPermission(it, app.RUN_SCRIPTS)}">
-						<div class="warning">${%NotApprovedYetButHasRightWarn}</div>
-						<div class="info">${%NotApprovedYetButHasRightInfo}</div>
+						<div>
+                            <l:icon src="symbol-warning plugin-ionicons-api" class="icon-md jenkins-!-warning-color" />
+                            ${%NotApprovedYetButHasRightWarn}
+                        </div>
+						<div>
+                            <l:icon src="symbol-arrow-forward plugin-ionicons-api" class="icon-md" />
+                            ${%NotApprovedYetButHasRightInfo}
+                        </div>
 					</j:when>
 					<j:otherwise>
-						<div class="warning">${%NotApprovedYet}</div>
+						<div>
+                            <l:icon src="symbol-warning plugin-ionicons-api" class="icon-md jenkins-!-warning-color" />
+                            ${%NotApprovedYet}
+                        </div>
 					</j:otherwise>
 				</j:choose>
+                </div>
 			</j:if>
 				<div align="right">
 					<f:submit value="${%Run}" name="run" />
