@@ -60,24 +60,33 @@ THE SOFTWARE.
                 <j:otherwise>
                     <form action="triggerScript" method="post" name="triggerscript">
                         <input type="hidden" value="${script.id}" name="id" />
-                        <f:entry>
-                            ${%executiononclient}
-                        </f:entry>
-                        <j:set var="currentNode" value="${currentNode}" />
-                        <f:entry name="node" title="${%SelectionNode}">
-                            <select name="node">
-                                <j:forEach var="aNode" items="${it.getSlaveAlias(script)}" varStatus="loop">
-                                    <j:choose>
-                                        <j:when test="${currentNode==aNode}">
-                                            <option value="${aNode}" selected="selected">${aNode}</option>
-                                        </j:when>
-                                        <j:otherwise>
-                                            <option value="${aNode}">${aNode}</option>
-                                        </j:otherwise>
-                                    </j:choose>
-                                </j:forEach>
-                            </select>
-                        </f:entry>
+
+                        <j:choose>
+                            <j:when test="${script.onlyMaster}">
+                                <f:entry description="${%ExecutionOnController}">
+                                    <input type="hidden" name="node" value="(master)" />
+                                </f:entry>
+                            </j:when>
+                            <j:otherwise>
+                                <f:entry>
+                                    <j:set var="currentNode" value="${currentNode}" />
+                                    <f:entry title="${%SelectionNode}" description="${%ExecutionOnSelectNode}" >
+                                        <select name="node" class="setting-input">
+                                            <j:forEach var="aNode" items="${it.getSlaveAlias(script)}" varStatus="loop">
+                                                <j:choose>
+                                                    <j:when test="${currentNode==aNode}">
+                                                        <option value="${aNode}" selected="selected">${aNode}</option>
+                                                    </j:when>
+                                                    <j:otherwise>
+                                                        <option value="${aNode}">${aNode}</option>
+                                                    </j:otherwise>
+                                                </j:choose>
+                                            </j:forEach>
+                                        </select>
+                                    </f:entry>
+                                </f:entry>
+                            </j:otherwise>
+                        </j:choose>
 
                         <j:if test="${!empty(script.parameters)}">
                             <f:entry title="${%Parameters}" description="${%ParametersDescription}">

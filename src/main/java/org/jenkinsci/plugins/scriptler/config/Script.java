@@ -48,7 +48,7 @@ public class Script implements Comparable<Script>, NamedResource {
     // User with Scriptler/RUN_SCRIPT permission can add/edit Scriptler step in projects
     public final boolean nonAdministerUsing;
 
-    // script is runnable only on Master
+    // Script is runnable only on the controller
     public final boolean onlyMaster;
 
     /**
