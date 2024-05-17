@@ -103,7 +103,7 @@ THE SOFTWARE.
                             </f:entry>
                         </j:if>
 
-                        <f:textarea name="script" value="${script.script}" readonly="true" />
+                        <f:textarea id="scriptler-script" name="script" value="${script.script}" readonly="true" />
                         <div style="margin-top: 2rem; margin-bottom: 2rem;" />
 
                         <j:if test="${notApprovedYet}">
@@ -131,7 +131,7 @@ THE SOFTWARE.
                         <div align="right">
                             <f:submit value="${%Run}" name="run" />
                         </div>
-                        <script>document.getElementById('script').focus();</script>
+                        <script>document.getElementById('scriptler-script').focus();</script>
                     </form>
                     <j:if test="${output!=null}">
                         <h2>${%Result}</h2>
